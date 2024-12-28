@@ -1,5 +1,5 @@
 const express = require('express')
-const { createInvoice, updateInvoice, deleteInvoice, getInvoice, getAllInvoice, updatePaymentStatus, generatePdfInvoice } = require('../controllers/invoice/index')
+const { createInvoice, updateInvoice, deleteInvoice, getInvoice, getAllInvoice, updatePaymentStatus, generatePdfInvoice, getUserInvoices } = require('../controllers/invoice/index')
 
 const { authMiddleware, roleCheckMiddleware } = require('../middlewares/index')
 
@@ -12,6 +12,6 @@ invoiceRouter.get('/', authMiddleware, roleCheckMiddleware(['admin']), getAllInv
 invoiceRouter.delete('/:id', authMiddleware, roleCheckMiddleware(['admin']), deleteInvoice);
 invoiceRouter.post('/updatePaymentStatus', authMiddleware, roleCheckMiddleware(['admin']), updatePaymentStatus);
 invoiceRouter.post('/pdf/:invoiceNumber', authMiddleware, roleCheckMiddleware(['admin']), generatePdfInvoice);
-
+invoiceRouter.get('/getUserInvoices/:email', authMiddleware, getUserInvoices);
 
 module.exports = invoiceRouter;

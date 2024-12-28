@@ -5,5 +5,6 @@ const getInvoice = require('./getInvoice.controller')
 const getAllInvoice = require('./getAllInvoice.controller')
 const updatePaymentStatus = require('./updatePaymentStatus.controller')
 const generatePdfInvoice = require('./generatePdfInvoice.controller')
+const getUserInvoices = require('./getUserInvoices.controller')
 
-module.exports = { createInvoice, updateInvoice, deleteInvoice, getInvoice, getAllInvoice, updatePaymentStatus, generatePdfInvoice };
+module.exports = { createInvoice, updateInvoice, deleteInvoice, getInvoice, getAllInvoice, updatePaymentStatus, generatePdfInvoice, getUserInvoices };
