@@ -3,6 +3,7 @@ const Invoice = require('../../models/invoice')
 const { validDate } = require('../../utils/dateValidation');
 const { generateInvoiceNumber } = require('../../utils/generateInvoiceNumber');
 const { validMongodoId } = require('../../utils/mongoIdValidation');
+const invoiceEmitter = require('../../events/invoiceEvents')
 
 
 const createInvoice = async (req, res) => {
@@ -70,6 +71,10 @@ const createInvoice = async (req, res) => {
         })
 
         if (invoice) {
+
+            // Emit event for creation of invoice
+            invoiceEmitter.emit('invoice.created', invoice);
+
             return res.status(201).json({
                 success: true,
                 message: "Invoice created successfully!"

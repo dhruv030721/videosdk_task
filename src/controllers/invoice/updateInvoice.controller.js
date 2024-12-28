@@ -1,5 +1,6 @@
 const Invoice = require('../../models/invoice');
 const { validDate } = require('../../utils/dateValidation');
+const invoiceEmitter = require('../../events/invoiceEvents')
 
 const updateInvoice = async (req, res) => {
     try {
@@ -61,6 +62,9 @@ const updateInvoice = async (req, res) => {
         );
 
         if (updatedInvoice) {
+
+            invoiceEmitter.emit('invoice.updated', updatedInvoice)
+
             return res.status(200).json({
                 success: true,
                 message: "Invoice updated successfully!",

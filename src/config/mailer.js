@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer')
 
-const MailSender = async (fromMail = 'Invoice Generator - <invoicegenerator@videosdk.com>', toMail, title, pdfBuffer, invoiceData) => {
+const MailSender = async ({ fromMail = 'Invoice Generator - <invoicegenerator@videosdk.com>', title, toMail, pdfBuffer, invoiceData }) => {
     try {
         let transporter = nodemailer.createTransport({
             host: process.env.MAIL_HOST,
@@ -13,7 +13,7 @@ const MailSender = async (fromMail = 'Invoice Generator - <invoicegenerator@vide
         let info = await transporter.sendMail({
             from: fromMail,
             to: toMail,
-            subject: `Invoice ${invoiceData.invoiceNumber}`,
+            subject: title ? title : `Invoice ${invoiceData.invoiceNumber}`,
             text: 'Please find your invoice attached.',
             attachments: [
                 {
