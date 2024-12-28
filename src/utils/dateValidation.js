@@ -5,7 +5,14 @@ const validDate = (date) => {
     return givenDate.getTime() > currentDate;
 }
 
+const getFormattedDate = (date) => {
+    const givenDate = new Date(date);
+    const year = String(givenDate.getFullYear());
+    const month = String(givenDate.getMonth() + 1).padStart(2, '0');
+    const day = String(givenDate.getDate()).padStart(2, '0');
+
+    return `${day}-${month}-${year}`;
+}
 
 
-
-module.exports = {validDate};
+module.exports = {validDate, getFormattedDate};

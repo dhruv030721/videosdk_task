@@ -12,5 +12,4 @@ const generateInvoiceNumber = () => {
 }
 
 
-
 module.exports = {generateInvoiceNumber};

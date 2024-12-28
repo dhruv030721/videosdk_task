@@ -29,7 +29,7 @@ const updateInvoice = async (req, res) => {
             });
         }
 
-        let totalAmount;
+        let totalAmount = 0;
 
         // Recalculate the total amount if items, taxRate, or discount is updated
         if (items) {
@@ -37,8 +37,9 @@ const updateInvoice = async (req, res) => {
                 let elementTotalPrice = element.quantity * element.unitPrice;
                 return sum + elementTotalPrice
             }, 0);
+
             if (taxRate) {
-                totalAmount = totalAmount - (totalAmount * taxRate) / 100;
+                totalAmount = totalAmount + (totalAmount * taxRate) / 100;
             }
             if (discount) {
                 totalAmount = totalAmount - (totalAmount * discount) / 100;
@@ -46,7 +47,7 @@ const updateInvoice = async (req, res) => {
         }
 
         const updatedInvoice = await Invoice.findOneAndUpdate(
-            {invoiceNumber : id},
+            { invoiceNumber: id },
             {
                 ...(customer && { customer }),
                 ...(items && { items }),
