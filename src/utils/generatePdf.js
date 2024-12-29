@@ -2,7 +2,7 @@ const puppeteer = require('puppeteer');
 
 const createInvoicePDF = async (invoiceData) => {
     let browser;
-    if (process.env.ENVIRONMENT == "prodction") {
+    if (process.env.ENVIRONMENT == "PROD") {
         browser = await puppeteer.launch({
             executablePath: '/usr/bin/chromium-browser',
             headless: true,
