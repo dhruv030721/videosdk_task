@@ -98,7 +98,8 @@ The Invoice Management System is a backend application designed to manage invoic
      MAIL_HOST=<your_mail_host>
      MAIL_USER=<your_mail_username>
      MAIL_PASS=<your_mail_password>
-     
+     REDIS_HOST=<your_redis_host>
+     REDIS_PORT=<your_redis_port>
      ```
 
 4. Run the application:
