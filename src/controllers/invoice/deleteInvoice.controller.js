@@ -12,7 +12,7 @@ const deleteInvoice = async (req, res) => {
             });
         }
 
-        const deletedInvoice = await Invoice.findByIdAndDelete(id);
+        const deletedInvoice = await Invoice.findOneAndDelete({ invoiceNumber: id });
 
         // Check if the invoice exists and was deleted
         if (deletedInvoice) {
