@@ -1,7 +1,16 @@
 const puppeteer = require('puppeteer');
 
 const createInvoicePDF = async (invoiceData) => {
-    const browser = await puppeteer.launch();
+    let browser;
+    if (process.env.ENVIRONMENT == "prodction") {
+        browser = await puppeteer.launch({
+            executablePath: '/usr/bin/chromium-browser',
+            headless: true,
+            args: ['--no-sandbox', '--disable-setuid-sandbox']
+        });
+    } else {
+        browser = await puppeteer.launch();
+    }
     const page = await browser.newPage();
 
     const htmlContent = `
@@ -60,7 +69,7 @@ const createInvoicePDF = async (invoiceData) => {
     await browser.close();
 
     const buffer = Buffer.from(pdfBuffer)
-                
+
     return buffer;
 };
 
