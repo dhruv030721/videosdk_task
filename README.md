@@ -104,7 +104,7 @@ The Invoice Management System is a backend application designed to manage invoic
 
 4. Run the application:
    ```bash
-   npm start
+   npm run dev
    ```
 
 ---
