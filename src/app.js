@@ -1,6 +1,8 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const dbConnect = require('./config/database')
+const { EventQueue } = require('./queues/invoiceQueue')
+const morgan = require('morgan')
 const app = express();
 
 // Load all environment variables
@@ -15,6 +17,9 @@ app.use('/api/invoices/', require('./routes/invoice.routes'));
 
 // Database Connection
 dbConnect();
+
+// Redis Connection
+EventQueue();
 
 // Server Intialization
 const PORT = process.env.PORT || 3000;
